@@ -1,0 +1,6 @@
+- hosts: web
+  tasks:
+  - name: Install the latest version of Apache
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
