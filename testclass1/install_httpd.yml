@@ -4,3 +4,7 @@
     ansible.builtin.yum:
       name: httpd
       state: latest
+  - name: Make sure a service is running
+    systemd:
+      state: started
+      name: httpd
