@@ -7,8 +7,8 @@
 
   - name: Make sure a service is running
     systemd:
-      state: started
       name: httpd
+      state: started
       enabled: yes
 
   - name: Install unzip
