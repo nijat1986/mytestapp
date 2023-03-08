@@ -1,0 +1,12 @@
+- hosts: all
+  vars:
+    message: "Don't forget to update Kernel"
+  tasks:
+  - shell: "uname -r"
+    register: kernel_version
+
+  - debug:
+      msg: "your kernel version is {{ kernel_version.stdout }}"
+  
+  - debug:
+      msg: "{{ message }}"
