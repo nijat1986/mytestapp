@@ -1,0 +1,5 @@
+- name: Install Apache on Ubuntu
+  apt:
+    name: "{{ package_name }}"
+    state: latest
+    update_cache: yes
