@@ -1,0 +1,11 @@
+---
+# connection block
+- name: Test playbook to run
+  hosts: all
+  user: ec2-user
+  become: true
+  become_method: sudo
+  tasks:
+
+# list of tasks
+  - name: Install telnet
