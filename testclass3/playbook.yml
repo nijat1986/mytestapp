@@ -20,4 +20,14 @@
       name: johnd
       comment: John Doe
       uid: 1040
+
+  - name: Ensure group exist
+    ansible.builtin.group:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - sales
+    - billing
+    - admins
+    - developers
     
