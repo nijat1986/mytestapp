@@ -1,0 +1,27 @@
+---
+# connection block
+- name: Test playbook to run
+  hosts: all
+  user: ec2-user
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Install multiple package on amazon
+    when: ansible_facts ['distribution'] == "Amazon"
+    ansible.builtin.yum:    # module from the internet
+     name: httpd
+     state: present
+
+  - name: Install multiple package on ubuntu
+    when: ansible_facts ['distribution'] == "Ubuntu"
+    ansible.builtin.apt:    # module from the internet
+     name: apache2
+     state: present  
+
+
+
+
+
+  #- name: Print all available facts
+   # ansible.builtin.debug:
+    #var: ansible_facts ['distribution']
