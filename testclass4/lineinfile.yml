@@ -1,0 +1,13 @@
+---
+# connection block
+- name: Test playbook to run
+  hosts: all
+  user: ec2-user
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Create a file with a content
+    ansible.builtin.lineinfile:    # module from the internet
+     path: /tmp/testfile
+     line: 13.59.69.146 foo.lab.net foo
+     create: yes  
