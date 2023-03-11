@@ -1,0 +1,13 @@
+---
+# connection block
+- name: Test playbook to run
+  hosts: all
+  user: ec2-user
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Install multiple package on ubuntu
+    when: ansible_facts ['kernel'] == "4.14.232-177.418.amzn2.x86_64"
+    ansible.builtin.package:    # module from the internet
+     name: kernel
+     state: latest
