@@ -11,3 +11,8 @@
       url: http://wordpress.org/latest.tar.gz
       dest: /tmp/
  
+  - name: Extract foo.tgz into /var/lib/foo
+    ansible.builtin.unarchive:
+      src: /tmp/wordpress-6.1.1.tar.gz
+      dest: /tmp/
+      remote_src: true
