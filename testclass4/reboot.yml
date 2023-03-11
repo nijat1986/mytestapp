@@ -13,5 +13,6 @@
     ansible.builtin.package:    # module from the internet
       name: telnet
       state: latest
+    ignore_errors: true
 
    
