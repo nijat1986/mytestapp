@@ -9,5 +9,6 @@
   - name: Create a file with a content
     ansible.builtin.lineinfile:    # module from the internet
      path: /tmp/testfile
-     line: 13.59.69.146 foo.lab.net foo
-     create: yes  
+     regexp: '^13.59.69.146 foo.lab.net foo' # Search for line that startswith '13'
+     line: '3.136.233.237 foo.lab.net foo'
+      
