@@ -5,14 +5,17 @@
   user: ec2-user
   become: true
   become_method: sudo
+  vars:
+    wordpress_version: "4.0.32"
+    php_version:       "5.4.16"
   tasks:
   - name: Install multiple package on Amazon
     when: ansible_facts ['distribution'] == "Amazon"
     ansible.builtin.package:    # module from the internet
       name: 
       - httpd
-      - php
-      - php-mysql
+      - php-{{ php_version }}
+      - php-mysql-{{ php_version }}
       - telnet
       - wget
       state: present
@@ -20,13 +23,13 @@
   - name: Download wordpress
     when: ansible_facts ['distribution'] == "Amazon"
     ansible.builtin.get_url:
-      url: http://wordpress.org/wordpress-4.0.32.tar.gz
+      url: http://wordpress.org/wordpress-{{ wordpress_version }}.tar.gz
       dest: /tmp/
 
   - name: Extract wordpress.tgz into /tmp
     when: ansible_facts ['distribution'] == "Amazon"
     ansible.builtin.unarchive:
-      src: /tmp/wordpress-4.0.32.tar.gz
+      src: /tmp/wordpress-{{ wordpress_version }}.tar.gz
       dest: /tmp/
       remote_src: true
 
