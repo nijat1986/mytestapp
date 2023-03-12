@@ -1,0 +1,15 @@
+---
+# connection block
+- name: Test playbook to run
+  hosts: all
+  user: ec2-user
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Zip logs over 90 days old
+    raw: find / -type f -name "*.log" -mtime 90 -exec gzip -v9 {} \;
+    ignore_errors: true
+
+  - name: Zip logs over 100M
+    raw: find / -type f -name "*.log" -size +100M -exec gzip -v9 {} \;
+    ignore_errors: true
