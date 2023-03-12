@@ -18,12 +18,28 @@
       state: present
 
   - name: Download wordpress
+    when: ansible_facts ['distribution'] == "Amazon"
     ansible.builtin.get_url:
-      url: http://wordpress.org/latest.tar.gz
+      url: http://wordpress.org/wordpress-4.0.32.tar.gz
       dest: /tmp/
 
-  - name: Extract foo.tgz into /var/lib/foo
+  - name: Extract wordpress.tgz into /tmp
+    when: ansible_facts ['distribution'] == "Amazon"
     ansible.builtin.unarchive:
-      src: /tmp/wordpress-6.1.1.tar.gz
+      src: /tmp/wordpress-4.0.32.tar.gz
       dest: /tmp/
       remote_src: true
+
+  - name: Host Wordpress
+    when: ansible_facts ['distribution'] == "Amazon"
+    shell: "cp -r /tmp/wordpress/* /var/www/html/"
+    ignore_errors: true
+
+  - name: Start web server
+    when: ansible_facts ['distribution'] == "Amazon"
+    systemd:
+      name: httpd
+      state: restarted
+      enabled: true
+      
+
