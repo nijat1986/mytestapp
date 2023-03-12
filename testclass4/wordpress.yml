@@ -19,6 +19,7 @@
       - telnet
       - wget
       state: present
+    notify: Start web server
 
   - name: Download wordpress
     when: ansible_facts ['distribution'] == "Amazon"
@@ -38,6 +39,7 @@
     shell: "cp -r /tmp/wordpress/* /var/www/html/"
     ignore_errors: true
 
+  handlers:
   - name: Start web server
     when: ansible_facts ['distribution'] == "Amazon"
     systemd:
